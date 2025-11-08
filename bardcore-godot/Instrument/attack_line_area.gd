@@ -4,7 +4,8 @@ var beatTimer: Timer
 
 func _ready() -> void:
 	beatTimer = get_tree().get_first_node_in_group('BeatTimer')
-	attack_sound.finished.connect(clean_up)
+	#unnecessary, it's already connected by hand (check your nodes)
+	#attack_sound.finished.connect(clean_up)
 	beatTimer.timeout.connect(_on_triggered)
 
 func _on_triggered() -> void:

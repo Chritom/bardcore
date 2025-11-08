@@ -9,10 +9,12 @@ const VIOLIN = preload("uid://lxalv8rqbk0c")
 @onready var player_name: Label3D = $PlayerName
 @onready var instrument_spawn: Node3D = $InstrumentSpawn
 
-@export var speed:float = 10.0
 @export var dash_force: float = 50.0
 @export var dash_cooldown: float = 0.1
 @export var dash_duration: float = 0.1
+
+@export var stat_comp: stat_component
+@export var inventory: inventory_component
 
 var gravity:float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var camera: Camera3D
@@ -37,6 +39,9 @@ func _physics_process(delta: float) -> void:
 		point_to_mouse()
 	else:
 		look_direction()
+	
+	if MultiplayerInput.is_action_just_pressed(device, "interact"):
+		inventory.try_pickup()
 	
 	velocity.y -= gravity * delta
 	move_and_slide()
@@ -71,11 +76,11 @@ func movement():
 	var input_dir = MultiplayerInput.get_vector(device, "move_left", "move_right", "move_up", "move_down")
 	
 	if input_dir:
-		velocity.x = input_dir.x * speed
-		velocity.z = input_dir.y * speed
+		velocity.x = input_dir.x * stat_comp.get_stat(stat_comp.stat_id.MOVEMENT_SPEED)
+		velocity.z = input_dir.y * stat_comp.get_stat(stat_comp.stat_id.MOVEMENT_SPEED)
 	else:
-		velocity.x = move_toward(velocity.x, 0, speed)
-		velocity.z = move_toward(velocity.z, 0, speed)
+		velocity.x = move_toward(velocity.x, 0, stat_comp.get_stat(stat_comp.stat_id.MOVEMENT_SPEED))
+		velocity.z = move_toward(velocity.z, 0, stat_comp.get_stat(stat_comp.stat_id.MOVEMENT_SPEED))
 
 func set_playername():
 	player_name.set_text("P " + str(player))

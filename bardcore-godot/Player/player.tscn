@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://co7r3uteoegh4"]
+[gd_scene load_steps=16 format=3 uid="uid://co7r3uteoegh4"]
 
 [ext_resource type="Script" uid="uid://dx38dnq0t3vu" path="res://Player/Player.gd" id="1_fhl08"]
 [ext_resource type="Script" uid="uid://c1oy8va3logcp" path="res://States/state_machine.gd" id="2_vtle1"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://dri7mdulo5mpn" path="res://States/Player/Movement/PlayerDashing.gd" id="5_x3vf3"]
 [ext_resource type="FontFile" uid="uid://difvbbraws6c5" path="res://addons/Kenney_Fonts/Kenney High.ttf" id="6_apopc"]
 [ext_resource type="PackedScene" uid="uid://dd418ylpenn6d" path="res://Components/inventory_component.tscn" id="7_vtle1"]
+[ext_resource type="PackedScene" uid="uid://dnrcjxypytfhw" path="res://Components/stat_component.tscn" id="9_x3vf3"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_o5qli"]
 
@@ -29,9 +30,11 @@ size = Vector3(0.46, 0.26, 0.07)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0wfyh"]
 
-[node name="Player" type="CharacterBody3D" groups=["Player"]]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("stat_comp", "inventory") groups=["Player"]]
 collision_layer = 2
 script = ExtResource("1_fhl08")
+stat_comp = NodePath("StatComponent")
+inventory = NodePath("InventoryComponent")
 
 [node name="InstrumentSpawn" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4845772, -0.66652244)
@@ -83,3 +86,5 @@ font_size = 12
 outline_size = 6
 
 [node name="InventoryComponent" parent="." instance=ExtResource("7_vtle1")]
+
+[node name="StatComponent" parent="." instance=ExtResource("9_x3vf3")]

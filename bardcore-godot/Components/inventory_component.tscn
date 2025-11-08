@@ -8,10 +8,10 @@ radius = 0.44064498
 [node name="InventoryComponent" type="Node3D"]
 script = ExtResource("1_j7b1u")
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="PickupArea" type="Area3D" parent="."]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="PickupAreaShape" type="CollisionShape3D" parent="PickupArea"]
 shape = SubResource("SphereShape3D_gnq3u")
 
-[connection signal="area_entered" from="Area3D" to="." method="add_possible_pickupable_item"]
-[connection signal="area_exited" from="Area3D" to="." method="remove_pickupable_item"]
+[connection signal="area_entered" from="PickupArea" to="." method="add_possible_pickupable_item"]
+[connection signal="area_exited" from="PickupArea" to="." method="remove_pickupable_item"]

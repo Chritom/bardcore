@@ -16,7 +16,7 @@ func _ready() -> void:
 	
 	read_all_combat_maps()
 
-	load_map(current_grid_position)
+	#load_map(current_grid_position)
 
 func read_all_combat_maps():
 	var dirs = ResourceLoader.list_directory("res://Maps/CombatMaps")
@@ -42,13 +42,13 @@ func unload_map():
 	if get_tree().current_scene:
 		get_tree().current_scene.queue_free()
 	
-	GameManager.save_all_players()
+	PlayerManager.save_all_players()
 	
 	if current_map:
 		var root = get_tree().get_root()
 		root.remove_child.call_deferred(current_map)
 
-func load_map(pos: Vector2i) -> void:
+func load_map(pos: Vector2i = current_grid_position) -> void:
 	unload_map()
 	var root = get_tree().get_root()
 	var map_to_load = get_map(pos)

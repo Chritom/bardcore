@@ -4,7 +4,7 @@ class_name EnemyFollow
 var follow_target:CharacterBody3D
 
 func enter(previous_state_path: String, data := {}) -> void:
-	var target = GameManager.player_nodes[randi_range(0, GameManager.player_nodes.size()-1)]
+	var target = PlayerManager.player_nodes[randi_range(0, PlayerManager.player_nodes.size()-1)]
 	follow_target = target
 
 func physics_update(delta: float) -> void:

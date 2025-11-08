@@ -10,7 +10,7 @@ enum item_type {
 }
 
 @export var type: item_type = item_type.RING
-@export var modification: int
+@export var upgrades: Array[upgrade]
 @export var mesh: PackedScene
 
 var item_mesh: Node3D

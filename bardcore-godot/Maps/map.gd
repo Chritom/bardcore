@@ -40,7 +40,7 @@ func exit_right():
 func spawn_players():
 	# TODO get access to all players and place them at the entrance
 	# compat with multiplayer spawning in
-	if GameManager.player_nodes.is_empty():
+	if PlayerManager.player_nodes.is_empty():
 		return
 	
 	var entrance
@@ -49,7 +49,7 @@ func spawn_players():
 	else:
 		entrance = right_portal
 	
-	var player_nodes = GameManager.player_nodes
+	var player_nodes = PlayerManager.player_nodes
 	var entrance_position = entrance.spawn_center.global_position
 	
 	for player_node in player_nodes:

@@ -1,0 +1,37 @@
+{
+	"nodes":[
+		{"id":"0f1aed1d0fd27858","type":"group","x":-1520,"y":-560,"width":1680,"height":1040,"color":"4","label":"Map"},
+		{"id":"b1aa9f086271f776","x":-600,"y":-1320,"width":1671,"height":580,"color":"6","type":"group","label":"Manager"},
+		{"id":"16e35efc6fb53aba","type":"group","x":280,"y":-560,"width":1040,"height":900,"color":"5","label":"Player"},
+		{"id":"9b1648db8461dd67","type":"text","text":"Instrument\n\nHandles Combat and Sound","x":802,"y":-113,"width":268,"height":90},
+		{"id":"fc2befa23703f6c3","type":"text","text":"Combat State Machine","x":802,"y":49,"width":268,"height":60},
+		{"id":"9a6152b4118d51da","type":"text","text":"Player\n\nHolds basic controls that are always available like turning the character or picking up items\n\n","x":581,"y":-480,"width":374,"height":187},
+		{"id":"13af8f4bd09d6b1d","type":"text","text":"Movement State Machine\n","x":506,"y":-113,"width":250,"height":60},
+		{"id":"66e464ab35fa6e66","type":"text","text":"Player State","x":506,"y":-11,"width":250,"height":60},
+		{"id":"a0376e91dcb6271a","type":"text","text":"State","x":811,"y":160,"width":250,"height":60},
+		{"id":"38614de6bb1644db","type":"text","text":"Map Manager\n\nHolds reference to homebase, always the left-most map on the grid\nAlso holds all previous Maps in memory, so players can travel backwards as well\n(In future, transitioning to the next biome deletes the previous map grid)\n\n\n```python\nconst HOMEBASE = preload(\"uid://cr1ydxfa4aiik\")\nvar combat_maps = []\n\nvar current_map : Map\nvar coming_from_left: bool = true\n\nvar map_grid : Dictionary[Vector2i, Map] = {}\nvar current_grid_position : Vector2i\n```","x":-546,"y":-1280,"width":722,"height":507},
+		{"id":"6e6ac549658314a1","type":"text","text":"Player Manager\n\nJoins new players to the game","x":286,"y":-1239,"width":278,"height":149},
+		{"id":"976383d594c9ec4e","type":"text","text":"Game Manager\n\nHolds all Player Nodes as Dict","x":286,"y":-1026,"width":278,"height":149},
+		{"id":"22492a0992cfc4f6","type":"text","text":"Multiplayer Input\n\nHandles Input from different devices and applies it to the correct Player Node","x":640,"y":-1026,"width":385,"height":149},
+		{"id":"c8255af741b8004a","type":"text","text":"Map\n\nHolds portals that check for player entry.\nIf entered, trigger transition to next map.\n\nLocks gates physically, if there are any undefeated enemies left.\n\n```python\n@onready var enemy_nodes: Node3D = $Enemies\n@onready var exit_nodes: Node3D = $Exits\n@onready var bits: Node3D = $Bits\n\nvar enemies = []\nvar portals = []\nvar right_portal:Portal\nvar left_portal:Portal\n```","x":-936,"y":-511,"width":580,"height":436},
+		{"id":"c48a3f9f29c7b3a7","x":-1401,"y":160,"width":250,"height":60,"type":"text","text":"Portal"},
+		{"id":"90105961aa2f2f8f","x":-796,"y":160,"width":250,"height":60,"type":"text","text":"Loot"},
+		{"id":"e34d683ce9220f4c","x":-1111,"y":300,"width":250,"height":60,"type":"text","text":"Enemy"},
+		{"id":"bb24d8f5ff2e8590","x":-420,"y":160,"width":250,"height":60,"type":"text","text":"Camera"}
+	],
+	"edges":[
+		{"id":"fa3e170164991bfd","fromNode":"38614de6bb1644db","fromSide":"bottom","toNode":"c8255af741b8004a","toSide":"top"},
+		{"id":"e7786bc8646c8021","fromNode":"6e6ac549658314a1","fromSide":"bottom","toNode":"976383d594c9ec4e","toSide":"top"},
+		{"id":"688ab5d705ab66a3","fromNode":"976383d594c9ec4e","fromSide":"bottom","toNode":"9a6152b4118d51da","toSide":"top"},
+		{"id":"f8cb087192ae1c12","fromNode":"9a6152b4118d51da","fromSide":"bottom","toNode":"13af8f4bd09d6b1d","toSide":"top"},
+		{"id":"5beb7fdf19c9de46","fromNode":"9a6152b4118d51da","fromSide":"bottom","toNode":"9b1648db8461dd67","toSide":"top"},
+		{"id":"e8818472bca34892","fromNode":"9b1648db8461dd67","fromSide":"bottom","toNode":"fc2befa23703f6c3","toSide":"top"},
+		{"id":"7d484a5922827a2e","fromNode":"22492a0992cfc4f6","fromSide":"left","toNode":"976383d594c9ec4e","toSide":"right"},
+		{"id":"84b6c9ea33bcf727","fromNode":"c8255af741b8004a","fromSide":"bottom","toNode":"c48a3f9f29c7b3a7","toSide":"top","toEnd":"none","label":"Signal when entered"},
+		{"id":"582c95ce20da6d14","fromNode":"c8255af741b8004a","fromSide":"bottom","toNode":"e34d683ce9220f4c","toSide":"top","toEnd":"none","label":"Signal when Dead"},
+		{"id":"1ab1abf049f443b2","fromNode":"c8255af741b8004a","fromSide":"bottom","toNode":"90105961aa2f2f8f","toSide":"top","toEnd":"none"},
+		{"id":"15330ce1007ba473","fromNode":"13af8f4bd09d6b1d","fromSide":"bottom","toNode":"66e464ab35fa6e66","toSide":"top"},
+		{"id":"4f3d87d1a098eb06","fromNode":"fc2befa23703f6c3","fromSide":"bottom","toNode":"a0376e91dcb6271a","toSide":"top"},
+		{"id":"de397a53b337cbf3","fromNode":"c8255af741b8004a","fromSide":"bottom","toNode":"bb24d8f5ff2e8590","toSide":"top"}
+	]
+}

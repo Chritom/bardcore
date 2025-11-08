@@ -8,15 +8,6 @@ const ATTACK_LINE_AREA = preload("uid://bgjsdlwnmpwgj")
 @export var attack_sound: AudioStreamPlayer3D
 var attack_cooldown_timer: Timer
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
 func enter(previous_state_path: String, data := {}) -> void:
 	if !attack_cooldown_timer:
 		print("No cooldown timer found. Creating new timer.")
@@ -33,7 +24,7 @@ func enter(previous_state_path: String, data := {}) -> void:
 	attack_cooldown_timer.start(owner.weak_attack_cooldown)
 	var attackArea = ATTACK_LINE_AREA.instantiate()
 	attackArea.global_position = attack_spawn.global_position
-	get_tree().current_scene.add_child(attackArea)
+	MapManager.current_map.add_child(attackArea)
 	attackArea.rotation = attack_spawn.global_rotation
 	place_sound.play()
 	
